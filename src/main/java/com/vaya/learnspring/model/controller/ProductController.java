@@ -16,6 +16,8 @@ public class ProductController {
 
         products.add(new Product(1, "Laptop", 50000));
         products.add(new Product(2, "Phone", 20000));
+        products.add(new Product(2, "keyboard", 30000));
+        products.add(new Product(2, "mouse", 50000));
 
     }
 
@@ -48,6 +50,39 @@ public class ProductController {
 
         return product;
 
+    }
+
+    @PutMapping("/products/{id}")
+    public Product updateProduct(@PathVariable int id,
+                                 @RequestBody Product updatedProduct) {
+
+        for (int i = 0; i < products.size(); i++) {
+
+            if (products.get(i).getId() == id) {
+
+                products.set(i, updatedProduct);
+
+                return updatedProduct;
+            }
+        }
+
+        return null;
+
+    }
+    @DeleteMapping("/products/{id}")
+    public String deleteProduct(@PathVariable int id) {
+
+        for (Product product : products) {
+
+            if (product.getId() == id) {
+
+                products.remove(product);
+
+                return "Product Deleted";
+            }
+        }
+
+        return "Product Not Found";
     }
 
 }
