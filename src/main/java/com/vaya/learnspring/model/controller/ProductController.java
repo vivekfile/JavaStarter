@@ -1,6 +1,7 @@
 package com.vaya.learnspring.model.controller;
 
 import com.vaya.learnspring.model.Product;
+import com.vaya.learnspring.model.repository.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,15 +11,10 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private List<Product> products = new ArrayList<>();
+    private final ProductRepository repository;
 
-    public ProductController() {
-
-        products.add(new Product(1, "Laptop", 50000));
-        products.add(new Product(2, "Phone", 20000));
-        products.add(new Product(2, "keyboard", 30000));
-        products.add(new Product(2, "mouse", 50000));
-
+    public ProductController(ProductRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping("/")
@@ -29,60 +25,42 @@ public class ProductController {
     @GetMapping("/products")
     public List<Product> getProducts() {
 
-        return products;
+        return repository.findAll();
 
     }
 
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable int id) {
-        for (Product product : products) {
-            if (product.getId() == id) {
-                return product;
-            }
-        }
-        return null;
+    public Product getProduct(@PathVariable int id) {
+
+        return repository.findById(id).orElse(null);
+
     }
 
     @PostMapping("/products")
     public Product addProduct(@RequestBody Product product) {
 
-        products.add(product);
-
-        return product;
+        return repository.save(product);
 
     }
 
     @PutMapping("/products/{id}")
-    public Product updateProduct(@PathVariable int id,
-                                 @RequestBody Product updatedProduct) {
+    public Product update(@PathVariable int id,
+                          @RequestBody Product product) {
 
-        for (int i = 0; i < products.size(); i++) {
+        product.setId(id);
 
-            if (products.get(i).getId() == id) {
-
-                products.set(i, updatedProduct);
-
-                return updatedProduct;
-            }
-        }
-
-        return null;
+        return repository.save(product);
 
     }
     @DeleteMapping("/products/{id}")
-    public String deleteProduct(@PathVariable int id) {
+    public String delete(@PathVariable int id) {
 
-        for (Product product : products) {
+        repository.deleteById(id);
 
-            if (product.getId() == id) {
+        return "Deleted";
 
-                products.remove(product);
-
-                return "Product Deleted";
-            }
-        }
-
-        return "Product Not Found";
     }
 
-}
+
+    }
+
