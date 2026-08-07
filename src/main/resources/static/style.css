@@ -1,0 +1,21 @@
+body{
+
+    font-family: Arial;
+
+    padding:40px;
+
+}
+
+.card{
+
+    border:1px solid gray;
+
+    padding:20px;
+
+    margin:15px;
+
+    width:250px;
+
+    border-radius:10px;
+
+}

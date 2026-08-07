@@ -17,10 +17,7 @@ public class ProductController {
         this.repository = repository;
     }
 
-    @GetMapping("/")
-    public String greet() {
-        return "Home page";
-    }
+
 
     @GetMapping("/products")
     public List<Product> getProducts() {
