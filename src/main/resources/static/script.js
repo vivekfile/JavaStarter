@@ -11,15 +11,23 @@ function loadProducts() {
             products.forEach(product => {
 
                 output += `
-                    <div class="card">
 
-                        <h2>${product.name}</h2>
+                <div class="card">
 
-                        <p>ID : ${product.id}</p>
+                    <img src="https://picsum.photos/300/200?random=${product.id}" alt="Product">
 
-                        <p>Price : ₹${product.price}</p>
+                    <h2>${product.name}</h2>
 
-                    </div>
+                    <p class="id">Product ID : ${product.id}</p>
+
+                    <p class="price">₹ ${product.price}</p>
+
+                    <button class="buy">
+                        Buy Now
+                    </button>
+
+                </div>
+
                 `;
 
             });

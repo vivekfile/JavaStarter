@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
 
-    <title>Products</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Store</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<h1>Products</h1>
+<div class="container">
 
-<button onclick="loadProducts()">
-    Load Products
-</button>
+    <h1>🛍 Product Store</h1>
 
-<div id="products"></div>
+    <button onclick="loadProducts()" class="btn">
+        Load Products
+    </button>
+
+    <div id="products" class="product-container">
+
+    </div>
+
+</div>
 
 <script src="script.js"></script>
 
